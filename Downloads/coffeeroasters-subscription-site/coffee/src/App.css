@@ -1,0 +1,9 @@
+.radio-container{
+  display: flex;
+}
+.radio-option{
+  width: auto;
+}
+.radio-description{
+  width: 50%;
+}
