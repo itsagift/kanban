@@ -86,8 +86,8 @@ export default function Plans(){
 
   <h2>Order Summary</h2>
   <p>
-    “I drink my coffee as {state.preferences}, with a {state.beanType} type of bean. {state.quantity} ground ala {state.grindOption},
-    sent to me {state.deliveries}.”
+    “I drink my coffee as {state.preferences ? state.preferences : "_____"}, with a {state.beanType ?  state.beanType : "_____"} type of bean. {state.quantity ?  state.quantity : "_____"} ground ala {state.grindOption ?  state.grindOption : "_____"},
+    sent to me {state.deliveries ?  state.deliveries : "_____"}.”
   </p>
 
   Create my plan!

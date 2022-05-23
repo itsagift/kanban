@@ -1,12 +1,5 @@
-import { useEffect } from "react";
+
 export default function Plan({plan, setState, state}){
-  useEffect(() => {
-    plan.answers.map((answer, i) => {
-      if (i === 0){
-        setState(prevstate => ({...prevstate, [plan.name]: answer.title }))
-      }
-    })
-  }, []);
 
   const handleChange = e => {
     const target = e.target;
@@ -15,14 +8,14 @@ export default function Plan({plan, setState, state}){
     }
   };
 return(
-  <div>
-  <h1>{plan.question}</h1>
+  <div className="plan-container">
+  <h2>{plan.question}</h2>
   <div className="radio-container">
   {
     plan.answers.map((answer, i) => {
       
       return(
-        <div className="radio-option">
+        <div className={state[plan.name] === answer.title ? "radio-option checked" : "radio-option"}>
           <label>
           <input
               type="radio"
@@ -32,7 +25,7 @@ return(
               onChange={handleChange}
             />
           
-          <h1 className="radio-title">{answer.title}</h1>
+          <h4 className="radio-title">{answer.title}</h4>
           <div className="radio-description">{answer.description}</div>
           </label>
         </div> 
