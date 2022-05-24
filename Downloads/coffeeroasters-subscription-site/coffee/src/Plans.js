@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Plan from "./components/Plan";
 
 export default function Plans(){
@@ -9,7 +9,9 @@ export default function Plans(){
     "Grind Option": '',
     "Deliveries": ''
   });
-  const [openAccordion, setOpenAccordion] = useState("Preferences");
+  const [openAccordion, setOpenAccordion] = useState("");
+  const [isComplete, setIsComplete] = useState(false);
+  const [grindDisabled, setGrindDisabled] = useState(false);
   const plans = [
     {
       title: "Preferences", 
@@ -48,8 +50,24 @@ export default function Plans(){
     },
   ]
 
+  useEffect(() => {
+    // Update the document title using the browser API
+    if(!grindDisabled){
+      setIsComplete(Object.values(state).some(x => x === ''));
+    }
+    else{
+      let clone = state;
+      delete clone["Grind Option"];
+      setIsComplete(Object.values(clone).some(x => x === ''));
+    }
+  }, [state]);
+
   function handleNav(){
     console.log("test")
+  }
+
+  function isEmpty(array){
+    
   }
 
   return(
@@ -59,7 +77,7 @@ export default function Plans(){
         plans.map((plan, i) => {
           return(
             <div 
-              className={`accordion-nav--item ${openAccordion === plan.title ? "selected" : ""}`}
+              className={`accordion-nav--item ${openAccordion[openAccordion.length - 1] === plan.title ? "selected" : ""}`}
             >
               <h4 className="accordion-nav--number">{`0${i+1}`}</h4>
               <h4 className="accordion-nav--title">{plan.title}</h4>
@@ -72,18 +90,33 @@ export default function Plans(){
         {
           plans.map((plan) => {
             return(
-              <Plan setOpenAccordion={setOpenAccordion} plan={plan} setState={setState} state={state} openAccordion={openAccordion}/>
+              <Plan setOpenAccordion={setOpenAccordion} plan={plan} setState={setState} state={state} openAccordion={openAccordion} setGrindDisabled={setGrindDisabled} grindDisabled={grindDisabled}/>
             )
           })
         }
         <div className="order">
           <div className="order-summary">
             <div className="order-summary--title">Order Summary</div>
-            <div className="order-summary--text">
-              “I drink my coffee as <span className="order-summary--accent">{state["Preferences"] ? state["Preferences"] : "_____"}</span>, with a <span className="order-summary--accent">{state["Bean Type"] ?  state["Preferences"] : "_____"}</span> type of bean. <span className="order-summary--accent">{state["Quantity"] ?  state["Quantity"] : "_____"}</span> ground ala <span className="order-summary--accent">{state["Grind Option"] ?  state["Grind Option"] : "_____"}</span>,
-              sent to me <span className="order-summary--accent">{state["Deliveries"] ?  state["Deliveries"] : "_____"}</span>.”
+            <div className="order-summary--text" onClick={()=> {console.log(isEmpty)}}>
+              “I drink my coffee as 
+                <span className="order-summary--accent">{state["Preferences"] ? ` ${state["Preferences"]}` : "_____"}</span>,
+                
+                with a 
+                
+                <span className="order-summary--accent">{state["Bean Type"] ?  ` ${state["Bean Type"]} ` : "_____"}</span>
+                
+                type of bean. 
+                
+                <span className="order-summary--accent">{state["Quantity"] ? ` ${state["Quantity"]}` : "_____"}</span> 
+                
+                {grindDisabled ? null : `ground ala`} 
+                
+                <span className="order-summary--accent">{grindDisabled ? null : state["Grind Option"] ?  ` ${state["Grind Option"]}` : "_____"}</span>,
+
+                sent to me <span className="order-summary--accent">{state["Deliveries"] ?  state["Deliveries"] : "_____"}</span>.”
             </div>
           </div>
+          <button className="order-create-button" disabled={isComplete}>Create my plan!</button>
         </div>
       </div>
       {/* 01

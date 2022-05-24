@@ -1,6 +1,15 @@
-import {useState} from 'react';
-export default function Plan({plan, setState, state, setOpenAccordion, openAccordion}){
+import {useState, useEffect} from 'react';
+export default function Plan({plan, setState, state, setOpenAccordion, openAccordion, grindDisabled, setGrindDisabled}){
   
+  useEffect(() => {
+    // Update the document title using the browser API
+    if (state["Preferences"] === "Capsule"){
+      setGrindDisabled(true)
+    }
+    else{
+      setGrindDisabled(false)
+    }
+  }, [state["Preferences"]]);
 
   const handleChange = e => {
     const target = e.target;
@@ -8,20 +17,28 @@ export default function Plan({plan, setState, state, setOpenAccordion, openAccor
       setState(prevstate => ({...prevstate, [plan.title]: e.target.value }));
     }
   };
-  const handleToggle = (e) => {
-    if (e.target.open){
-      setOpenAccordion(plan.title)
+  const handleClick = (e) => {
+    if (grindDisabled && plan.title === "Grind Option"){
+      e.preventDefault();
     }
     else{
-      setOpenAccordion("")
+      if (!openAccordion.includes(plan.title)){
+        setOpenAccordion(prevState => [prevState, plan.title])
+      }
+      else {
+        setOpenAccordion(prevState => prevState.filter(accordion => 
+          accordion !== plan.title))
+      }
     }
+    
   }
+  
 return(
   <div className="plan-items">
-  <details className="plan-accordion" onToggle={handleToggle}>
+  <details className={`plan-accordion ${plan.title === "Grind Option" && grindDisabled ? "disabled" : ""}`} onClick={handleClick}>
   <summary className='accordion-item'>
     <h2 className='accordion-title'>{plan.question}</h2>
-    <img className={`accordion-arrow ${openAccordion === plan.title ? "open" : ""}`} src='/plan/desktop/icon-arrow.svg'></img>
+    <img onClick={()=> console.log(openAccordion)} className={`accordion-arrow ${openAccordion.includes(plan.title) ? "open" : ""}`} src='/plan/desktop/icon-arrow.svg'></img>
   </summary>
   <div className="radio-buttons-container">
   {
@@ -30,7 +47,7 @@ return(
       return(
         <div className={state[plan.title] === answer.title ? "radio-button-option checked" : "radio-button-option"}>
           <label>
-          <input
+          <input className='radio-button-input'
               type="radio"
               name={plan.name}
               value={answer.title}
