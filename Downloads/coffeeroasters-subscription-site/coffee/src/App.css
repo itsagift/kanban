@@ -31,36 +31,67 @@ body{
   font-family: "Barlow", sans-serif;
   font-size: 16px;
   line-height: 26px;
+  box-sizing: border-box;
 }
 .title-alternate-big{
   color: var(--grey);
 }
-.plan-container{
-  width:730px;
+.plans-container{
+  padding: 0 11%;
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-template-columns: 1fr 3fr; 
+  gap: 0% 7%; 
 }
-.radio-container{
+details > summary::-webkit-details-marker{
+  display: none;
+}
+details > summary {
+  list-style: none;
+}
+
+.accordion-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.accordion-arrow{
+  margin-right: 0px;
+}
+.open{
+  
+  transform: rotate(180deg);
+}
+
+.accordion-title{
+  color: #83888F;
+  cursor: pointer;
+}
+
+.radio-buttons-container{
   display: grid; 
   grid-auto-columns: 1fr; 
   grid-template-columns: 1fr 1fr 1fr; 
+  height: 250px;
   gap: 0px 20px; 
 }
-.radio-option{
+.radio-button-option{
   width: auto;
-  padding:10%;
+  border-radius: 8px;
+  padding:14% 10%;
   background-color: var(--dark-cream);
 }
-.radio-option input{
+.radio-button-option input{
   opacity: 0;
   position: fixed;
   width: 0;
 }
-.radio-description{
-  
+.radio-button-description{
   font-family: "Barlow", sans-serif;
   font-size: 16px;
   line-height: 26px;
 }
-.radio-title{
+.radio-button-title{
   width: auto;
   margin: 0;
 }
@@ -68,6 +99,53 @@ body{
   background-color: var(--dark-cyan);
   color: var(--light-cream);
 }
-.checked .radio-title{
+.checked .radio-button-title{
   color: var(--light-cream);
+}
+
+
+.accordion-nav--item{
+  border-top: 1px solid var(--grey);
+  display: flex;
+  opacity: 0.4;
+}
+.accordion-nav--item:first-child{
+  border-top: none;
+}
+.accordion-nav--item:first-child .accordion-nav--number{
+  color: var(--dark-cyan);
+}
+.accordion-nav--title{
+  color: var(--dark-grey-blue);
+}
+.accordion-nav--number{
+  color: var(--grey)
+}
+
+.selected{
+  opacity: 1;
+}
+
+.accordion-nav--number{
+  margin-right:10px;
+}
+
+.order-summary{
+  border-radius: 8px;
+  padding: 7% 8%;
+  background-color: var(--dark-grey-blue);
+}
+.order-summary--title{
+  color: #fff;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+.order-summary--text{
+  font-family: "Fraunces", serif;
+  font-size: 24px;
+  line-height: 40px;
+  color: #fff;
+}
+.order-summary--accent{
+  color: var(--dark-cyan)
 }

@@ -3,43 +3,44 @@ import Plan from "./components/Plan";
 
 export default function Plans(){
   const [state, setState] = useState({
-    preferences: '', 
-    beanType: '',
-    quantity: '',
-    grindOption: '',
-    deliveries: ''
+    "Preferences": '', 
+    "Bean Type": '',
+    "Quantity": '',
+    "Grind Option": '',
+    "Deliveries": ''
   });
+  const [openAccordion, setOpenAccordion] = useState("Preferences");
   const plans = [
     {
-      name: "preferences", 
+      title: "Preferences", 
       question: "How do you drink your coffee?",
       answers: [
         {title: "Capsule", description:"Compatible with Nespresso systems and similar brewers"}, {title: "Filter", description: "For pour over or drip methods like Aeropress, Chemex, and V60"}, {title: "Espresso", description: "Dense and finely ground beans for an intense, flavorful experience"}
       ]
     },
     {
-      name: "beanType", 
+      title: "Bean Type", 
       question: "What type of coffee?",
       answers: [
         {title: "Single origin", description:"Distinct, high quality coffee from a specific family-owned farm"}, {title: "Decaf", description: "Just like regular coffee, except the caffeine has been removed"}, {title: "Blended", description: "Combination of two or three dark roasted beans of organic coffees"}
       ]
     },
     {
-      name: "quantity", 
+      title: "Quantity", 
       question: "How much would you like?",
       answers: [
         {title: "250mg", description:"Perfect for the solo drinker. Yields about 12 delicious cups."}, {title: "500mg", description: "Perfect option for a couple. Yields about 40 delectable cups."}, {title: "1000mg", description: "Perfect for offices and events. Yields about 90 delightful cups."}
       ]
     },
     {
-      name: "grindOption", 
+      title: "Grind Option", 
       question: "Want us to grind them?",
       answers: [
         {title: "Wholebean", description:"Best choice if you cherish the full sensory experience"}, {title: "Filter", description: "For drip or pour-over coffee methods such as V60 or Aeropress"}, {title: "Cafetiére", description: "Course ground beans specially suited for french press coffee"}
       ]
     },
     {
-      name: "deliveries", 
+      title: "Deliveries", 
       question: "How often should we deliver?",
       answers: [
         {title: "Every week", description:"$14.00 per shipment. Includes free first-class shipping."}, {title: "Every 2 weeks", description: "$17.25 per shipment. Includes free priority shipping."}, {title: "Every month", description: "$22.50 per shipment. Includes free priority shipping."}
@@ -47,20 +48,43 @@ export default function Plans(){
     },
   ]
 
-  function handleChecked(){
+  function handleNav(){
     console.log("test")
   }
 
   return(
-    <div>
-      <div>
+    <div className="plans-container">
+      <nav className="accordion-navbar">
+      {
+        plans.map((plan, i) => {
+          return(
+            <div 
+              className={`accordion-nav--item ${openAccordion === plan.title ? "selected" : ""}`}
+            >
+              <h4 className="accordion-nav--number">{`0${i+1}`}</h4>
+              <h4 className="accordion-nav--title">{plan.title}</h4>
+            </div>
+          )
+        })
+      }
+      </nav>
+      <div className="plan-items-container">
         {
           plans.map((plan) => {
             return(
-              <Plan plan={plan} setState={setState} state={state}/>
+              <Plan setOpenAccordion={setOpenAccordion} plan={plan} setState={setState} state={state} openAccordion={openAccordion}/>
             )
           })
         }
+        <div className="order">
+          <div className="order-summary">
+            <div className="order-summary--title">Order Summary</div>
+            <div className="order-summary--text">
+              “I drink my coffee as <span className="order-summary--accent">{state["Preferences"] ? state["Preferences"] : "_____"}</span>, with a <span className="order-summary--accent">{state["Bean Type"] ?  state["Preferences"] : "_____"}</span> type of bean. <span className="order-summary--accent">{state["Quantity"] ?  state["Quantity"] : "_____"}</span> ground ala <span className="order-summary--accent">{state["Grind Option"] ?  state["Grind Option"] : "_____"}</span>,
+              sent to me <span className="order-summary--accent">{state["Deliveries"] ?  state["Deliveries"] : "_____"}</span>.”
+            </div>
+          </div>
+        </div>
       </div>
       {/* 01
   Pick your coffee
@@ -84,13 +108,7 @@ export default function Plans(){
   04 Grind option
   05 Deliveries */}
 
-  <h2>Order Summary</h2>
-  <p>
-    “I drink my coffee as {state.preferences ? state.preferences : "_____"}, with a {state.beanType ?  state.beanType : "_____"} type of bean. {state.quantity ?  state.quantity : "_____"} ground ala {state.grindOption ?  state.grindOption : "_____"},
-    sent to me {state.deliveries ?  state.deliveries : "_____"}.”
-  </p>
-
-  Create my plan!
+  
 
   {/* Modal
 
@@ -104,7 +122,6 @@ export default function Plans(){
 
   $_____/month */}
 
-  Checkout
     </div>
   )
 }
