@@ -1,0 +1,70 @@
+:root{
+  --mainPurple: #635FC7;
+  --lightPurpleTransp: rgba(99, 95, 199, 0.1);
+  --mediumPurpleTransp: rgba(99, 95, 199, 0.35);
+  --mediumPurpleTransp2: rgba(99, 95, 199, 0.25);
+  --mainPurpleHover: #A8A4FF;
+  --black: #000112;
+  --darkBg: #20212C;
+  --darkGrey: #2B2C37;
+  --darkLines: #3E3F4E;
+  --mediumGrey: #828FA3;
+  --mediumGreyTransp: rgba(130, 143, 163, 0.25);
+  --lightLines: #E4EBFA;
+  --lightBg: #F4F7FD;
+  --white: #FFFFFF;
+  --whiteTransp: rgba(255, 255, 255, 0.25);
+  --whiteTransp2: rgba(255, 255, 255, 0.5);
+  --mainRed: #EA5555;
+  --mainRedHover: #FF9898;
+}
+
+[data-theme='light']{
+  --bg: var(--lightBg);
+  --buttonSecondaryBg: var(--lightPurpleTransp);
+  --buttonSecondaryBgHover: var(--mediumPurpleTransp);
+  --textFieldBorder: var(--mediumGreyTransp);
+  --textFieldIdle: rgba(0, 1, 18, 0.25),
+  --textFieldActive: var(--black);
+  --textFieldError: var(--mainRed);
+  --dropdownFieldIdle: var(--mediumGreyTransp);
+  --dropdownFieldActive: var(--mainPurple);
+  --dropdownFieldText: var(--black);
+  --dropdownListBg: var(--white);
+  --dropdownListText: var(--mediumGrey);
+  --checkboxBgIdle: var(--lightBg);
+  --checkboxBgHover: var(--mediumPurpleTransp2);
+  --checkboxTextCompleted: rgba(0, 1, 18, 0.5);
+  --checkboxCompleted: var(--mainPurple)
+}
+
+[data-theme='light']{
+  --bg: var(--darkGrey);
+  --buttonSecondaryBg: var(--white);
+  --buttonSecondaryBgHover: var(--white);
+  --textFieldBorder: var(--mediumPurpleTransp2);
+  --textFieldIdle: rgba(255, 255, 255, 0.25);
+  --textFieldActive: var(--white);
+  --textFieldError: var(--mainRed);
+  --dropdownFieldIdle: var(--mediumGreyTransp);
+  --dropdownFieldActive: var(--mainPurple);
+  --dropdownFieldText: var(--white);
+  --dropdownListBg: var(--darkBg);
+  --dropdownListText: var(--mediumGrey);
+  --checkboxBgIdle: var(--darkBg);
+  --checkboxBgHover: var(--mediumPurpleTransp2);
+  --checkboxTextCompleted: rgba(255, 255, 255, 0.5);
+  --checkboxCompleted: var(--mainPurple)
+}
+
+body{
+  margin: 0;
+  padding: 0;
+}
+
+.app{
+  width: 100%;
+  height: 100vh;
+  background-color: var(--bg);
+}
+

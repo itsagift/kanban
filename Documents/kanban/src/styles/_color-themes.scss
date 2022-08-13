@@ -1,0 +1,71 @@
+@import "colors";
+$bg: 'bg';
+$textFieldError: 'textFieldError';
+
+$themes: (
+  default: (
+    'bg': $lightBg,
+    'buttonSecondaryBg': $lightPurpleTransp,
+    'buttonSecondaryBgHover':
+    $mediumPurpleTransp,
+    'textFieldBorder': $mediumGreyTransp,
+    'textFieldIdle':
+    rgba(0, 1, 18, 0.25),
+    'textFieldActive': $black,
+    'textFieldError': $mainRed,
+    'dropdownFieldIdle': $mediumGreyTransp,
+    'dropdownFieldActive': $mainPurple,
+    'dropdownFieldText': $black,
+    'dropdownListBg': $white,
+    'dropdownListText': $mediumGrey,
+    'checkboxBgIdle': $lightBg,
+    'checkboxBgHover': $mediumPurpleTransp2,
+    'checkboxTextCompleted': rgba(0, 1, 18, 0.5),
+    'checkboxCompleted': $mainPurple
+  ),
+  dark: (
+    'bg': $darkGrey,
+    'buttonSecondaryBg': $white,
+    'buttonSecondaryBgHover':
+    $white,
+    'textFieldBorder': $mediumPurpleTransp2,
+    'textFieldIdle':
+    $whiteTransp,
+    'textFieldActive': $white,
+    'textFieldError': $mainRed,
+    'dropdownFieldIdle': $mediumGreyTransp,
+    'dropdownFieldActive': $mainPurple,
+    'dropdownFieldText': $white,
+    'dropdownListBg': $darkBg,
+    'dropdownListText': $mediumGrey,
+    'checkboxBgIdle': $darkBg,
+    'checkboxBgHover': $mediumPurpleTransp2,
+    'checkboxTextCompleted': $whiteTransp2,
+    'checkboxCompleted': $mainPurple
+  ),
+);
+
+$theme-map: null;
+
+@mixin theme() {
+  @each $theme, $map in $themes {
+    // $theme: darkTheme, lightTheme
+    // $map: ('text-color': ..., 'bg-color': ...)
+
+    // make the $map globally accessible, so that theme-get() can access it
+    $theme-map: $map !global;
+
+    // make a class for each theme using interpolation -> #{}
+    // use & for making the theme class ancestor of the class
+    // from which you use @include theme() {...}
+    .#{$theme} & {
+      @content;    // the content inside @include theme() {...}
+    }
+  }
+  // no use of the variable $theme-map now
+  $theme-map: null !global;
+}
+
+@function theme-get($key) {
+  @return map-get($theme-map, $key);
+}
