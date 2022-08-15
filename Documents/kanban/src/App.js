@@ -9,14 +9,17 @@ function App() {
   const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
 
   function switchTheme(){
-    const newTheme = theme == 'light' ? 'dark' : 'light';
+    const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
   }
   return (
     <div className="app" data-theme={theme}>
       <header className="App-header">
         <button onClick={switchTheme}>Toggle dark mode</button>
-        test
+        <p className="heading-L">test</p>
+        <button className="button-primary-L">Button Primary L</button>
+        <button className="button-primary-S">Button Primary S</button>
+        <button className="button-secondary">Button Primary S</button>
       </header>
     </div>
   );
