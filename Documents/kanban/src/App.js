@@ -8,7 +8,7 @@ import Sidebar from './components/Sidebar';
 import jsonData from './data.json';
 
 function App() {
-  const {darkMode, toggleDarkMode} = useContext(DarkModeContext)
+  const {darkMode} = useContext(DarkModeContext)
   const [selectedBoard, setSelectedBoard] = useState(jsonData.boards[0].name);
   const [sidebarVisible, setSidebarVisible] = useState(true);
   function showSidebar(){
@@ -27,7 +27,7 @@ function App() {
           </div>
           <Header setSelectedBoard={setSelectedBoard} selectedBoard={selectedBoard} showSidebar={showSidebar} sidebarVisible={sidebarVisible}/>
             {sidebarVisible &&
-              <Sidebar switchTheme={toggleDarkMode} sidebarVisible={sidebarVisible} hideSidebar={hideSidebar} selectedBoard={selectedBoard} setSelectedBoard={setSelectedBoard}/>
+              <Sidebar sidebarVisible={sidebarVisible} hideSidebar={hideSidebar} selectedBoard={selectedBoard} setSelectedBoard={setSelectedBoard}/>
             }
             <Dashboard sidebarVisible={sidebarVisible} showSidebar={showSidebar}/>
         </ModalProvider>
