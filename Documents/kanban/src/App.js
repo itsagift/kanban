@@ -1,27 +1,37 @@
-import Form from "./components/Form";
-import Form2 from "./components/Form2";
-import {useState} from 'react';
-import { useLocalStorage } from "./useLocalStorage";
+import {useState, useEffect, useContext} from 'react';
 
+import { DarkModeContext } from './context/dark-mode-context';
+import { ModalProvider } from './context/modal-context';
+import Dashboard from './components/Dashboard';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import jsonData from './data.json';
 
 function App() {
-  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
-
-  function switchTheme(){
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
+  const {darkMode, toggleDarkMode} = useContext(DarkModeContext)
+  const [selectedBoard, setSelectedBoard] = useState(jsonData.boards[0].name);
+  const [sidebarVisible, setSidebarVisible] = useState(true);
+  function showSidebar(){
+    setSidebarVisible(true);
   }
+  function hideSidebar(){
+    setSidebarVisible(false);
+  }
+
   return (
-    <div className="app" data-theme={theme}>
-      <header className="App-header">
-        <button onClick={switchTheme}>Toggle dark mode</button>
-        <p className="heading-L">test</p>
-        <button className="button-primary-L">Button Primary L</button>
-        <button className="button-primary-S">Button Primary S</button>
-        <button className="button-secondary">Button Primary S</button>
-      </header>
-    </div>
+    
+      <div className="app" data-theme={darkMode ? 'dark' : 'light'}>
+        <ModalProvider>
+          <div className={sidebarVisible ? 'logo' : 'logo logo-alt'}>
+            <img src='/assets/logo-dark.svg'></img>
+          </div>
+          <Header setSelectedBoard={setSelectedBoard} selectedBoard={selectedBoard} showSidebar={showSidebar} sidebarVisible={sidebarVisible}/>
+            {sidebarVisible &&
+              <Sidebar switchTheme={toggleDarkMode} sidebarVisible={sidebarVisible} hideSidebar={hideSidebar} selectedBoard={selectedBoard} setSelectedBoard={setSelectedBoard}/>
+            }
+            <Dashboard sidebarVisible={sidebarVisible} showSidebar={showSidebar}/>
+        </ModalProvider>
+      </div>
   );
 }
 
