@@ -22,10 +22,8 @@ function App() {
     
       <div className="app" data-theme={darkMode ? 'dark' : 'light'}>
         <ModalProvider>
-          <div className={sidebarVisible ? 'logo' : 'logo logo-alt'}>
-            <img src='/assets/logo-dark.svg'></img>
-          </div>
-          <Header setSelectedBoard={setSelectedBoard} selectedBoard={selectedBoard} showSidebar={showSidebar} sidebarVisible={sidebarVisible}/>
+          
+          <Header darkMode={darkMode} setSelectedBoard={setSelectedBoard} selectedBoard={selectedBoard} showSidebar={showSidebar} sidebarVisible={sidebarVisible}/>
             {sidebarVisible &&
               <Sidebar sidebarVisible={sidebarVisible} hideSidebar={hideSidebar} selectedBoard={selectedBoard} setSelectedBoard={setSelectedBoard}/>
             }

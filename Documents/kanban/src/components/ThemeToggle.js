@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { DarkModeContext } from '../context/dark-mode-context';
 
 function ThemeToggle(){
-  const {darkMode, toggleDarkMode} = useContext(DarkModeContext)
+  const {darkMode, toggleDarkMode} = useContext(DarkModeContext);
 
   function handleChange(){
 
