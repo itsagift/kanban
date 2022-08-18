@@ -25,9 +25,9 @@ function BoardList({selectedBoard, setSelectedBoard}){
           )
         })
       }
-      <li className='board-list-item board-list-item--new heading-M' onClick={() => {setModal(<TestModal2/>)}}>
-        Create new board
-      </li>
+      <li><button className='board-list-item board-list-item--new heading-M' onClick={() => {setModal(<TestModal2/>)}}>
+        + Create New Board
+      </button></li>
     </ul>
     </div>
   )

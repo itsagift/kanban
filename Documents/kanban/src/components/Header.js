@@ -11,8 +11,14 @@ return(
       </div>
     </div>
     <div className='header-left'>
-    {selectedBoard}
-    <button className='select-board-toggle' onClick={showSidebar}> Board Name</button>
+      <div className='header-selected'>
+        <h1 className='header-selected--desktop heading-XL'>
+          {selectedBoard}
+        </h1>
+        <button className='header-selected--mobile' onClick={showSidebar}>
+          {selectedBoard}
+        </button>
+      </div>
     </div>
     
   </header>

@@ -48,6 +48,7 @@
   --border: var(--lightLines);
   --sidebarBg: var(--white);
   --boardListHover: var(--lightPurpleTransp);
+  --headings: var(--black);
 }
 
 [data-theme='dark']{
@@ -70,6 +71,7 @@
   --border: var(--darkLines);
   --sidebarBg: var(--darkGrey);
   --boardListHover: var(--white);
+  --headings: var(--white);
 }
 
 body{
@@ -97,19 +99,19 @@ html{
     font-size: 24px;
     line-height: 30px;
     font-weight: 700;
-    color: var(--black);
+    color: var(--headings);
   }
   &-L{
     font-size: 18px;
     line-height: 23px;
     font-weight: 700;
-    color: var(--black);
+    color: var(--headings);
   }
   &-M{
     font-size: 15px;
     line-height: 19px;
     font-weight: 700;
-    color: var(--black);
+    color: var(--headings);
   }
   &-S{
     font-size: 12px;
@@ -135,7 +137,7 @@ html{
 
 button{
   border: none;
-  transition: 0.5s;
+  transition: 0.4s;
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
@@ -231,15 +233,28 @@ button{
   align-items: center;
   padding: 0;
   background-color: var(--sidebarBg);
-  
+  &-left{
+    width: 100%;
+    height: 97px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  &-selected{
+    padding-left: 20px;
+    &--desktop{
+      @media screen and (max-width: 600px) {
+        display: none;
+      }
+    }
+    &--mobile{
+      @media screen and (min-width: 601px) {
+        display: none;
+      }
+    }
+  }
 }
-.header-left{
-  width: 100%;
-  height: 97px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-}
+
 
 .sidebar{
   margin-top: 97px;
@@ -299,6 +314,7 @@ button{
     bottom: 0;
     background-color: var(--mainPurple);
     border-radius: 10px;
+    transition: 0.4s;
     &::before{
       position: absolute;
       content: "";
@@ -308,6 +324,7 @@ button{
       bottom: 3px;
       background-color: white;
       border-radius: 100%;
+      transition: 0.4s;
     }
     &:hover{
       background-color: var(--mainPurpleHover);
@@ -334,7 +351,7 @@ button{
     padding: 15px 0px 15px 10%;
     border-radius: 0px 35px 35px 0px;
     color: var(--mediumGrey);
-    background-color: var(--sidebarBg);
+    background: none;
     &:hover{
       background-color: var(--boardListHover);
       color: var(--mainPurple)
@@ -375,7 +392,14 @@ button{
       }
     }
     &--new{
-      color: var(--mainPurple)
+      width: 100%;
+      text-align: left;
+      display: block;
+      background: none;
+      color: var(--mainPurple);
+      &:hover{
+        color: var(--mainPurpleHover)
+      }
     }
   }
 }
