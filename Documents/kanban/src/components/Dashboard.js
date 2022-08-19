@@ -1,4 +1,5 @@
 import BoardList from './BoardList';
+import Column from './Column';
 
 function Dashboard({sidebarVisible, showSidebar, selectedBoard}){
 return(
@@ -7,7 +8,14 @@ return(
       !sidebarVisible &&
       <button className="sidebar-show-button" onClick={showSidebar}><img src="/assets/icon-show-sidebar.svg"/></button>
     }
-    <h1>{selectedBoard.columns.length}</h1>
+    
+    {
+      selectedBoard.columns.map((column)=> {
+        return(
+          <Column column={column}/>
+        )
+      })
+    }
   </div>
 )
 }

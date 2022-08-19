@@ -116,6 +116,7 @@ body{
     letter-spacing: 2.4px;
     color: var(--mediumGrey);
     font-weight: 700;
+    text-transform: uppercase;
   }
 }
 
@@ -404,9 +405,8 @@ button{
 
 .dashboard{
   display: flex;
-  align-items: center;
-  justify-content: center;
-  
+  align-items: flex-start;
+  justify-content: flex-start;
   height: calc(100vh - 97px);
   z-index: 0;
   background-color: var(--bg);
@@ -417,6 +417,7 @@ button{
     width: 100vw;
   }
 }
+
 
 .board-list{
   list-style: none;
@@ -453,6 +454,15 @@ button{
       }
     }
   }
+}
+.board-columns{
+  display: flex;
+
+}
+
+.column{
+  width: 280px;
+  margin-left: 24px;
 }
 
 .select-board-toggle{
