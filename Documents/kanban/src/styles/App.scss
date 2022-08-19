@@ -25,7 +25,7 @@
   --headingXL: bold 24px/30px Plus Jakarta Sans, sans-serif;
   --headingL: bold 18px/23px Plus Jakarta Sans, sans-serif;
   --headingM: bold 15px/19px Plus Jakarta Sans, sans-serif;
-  
+  --linear-light: #E9EFFA;
 }
 
 [data-theme='light']{
@@ -50,6 +50,7 @@
   --boardListHover: var(--lightPurpleTransp);
   --headings: var(--black);
   --modalAccent: var(--mediumGrey);
+  --linearBg: var(--linear-light);
 }
 
 [data-theme='dark']{
@@ -74,6 +75,7 @@
   --boardListHover: var(--white);
   --headings: var(--white);
   --modalAccent: var(--white);
+  --linearBg: var(--darkGrey);
 }
 
 body{
@@ -314,9 +316,7 @@ button{
     min-width: 261px;
     border-right: 1px solid var(--border);
     background-color: var(--sidebarBg);
-    height: calc(100vh - 97px);
-    margin: 0;
-    inset: 0;
+    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -407,7 +407,6 @@ button{
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  height: calc(100vh - 97px);
   z-index: 0;
   background-color: var(--bg);
   &-default{
@@ -432,6 +431,9 @@ button{
   &-item{
     padding: 15px 0px 15px 20px;
     border-radius: 0px 35px 35px 0px;
+    &:hover{
+      cursor: pointer;
+    }
     &--active{
       background-color: var(--mainPurple);
       color: var(--white);
@@ -463,6 +465,36 @@ button{
 .column{
   width: 280px;
   margin-left: 24px;
+  display: grid;
+  grid-template-rows: 60px auto;
+  &-new{
+    display: block;
+    background-color: var(--linearBg);
+    margin-top: 60px;
+    
+  }
+}
+
+.task{
+  background-color: var(--sidebarBg);
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 6px rgba(54, 78, 126, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  &-title{
+    margin: 0;
+  }
+  &:hover {
+    cursor: pointer;
+    .task-title{
+      color: var(--mainPurple)
+    }
+  }
+  
+}
+.subtasks{
+  margin-top: 10px;
+  color: var(--mediumGrey);
 }
 
 .select-board-toggle{

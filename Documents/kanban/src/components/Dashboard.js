@@ -8,7 +8,7 @@ return(
       !sidebarVisible &&
       <button className="sidebar-show-button" onClick={showSidebar}><img src="/assets/icon-show-sidebar.svg"/></button>
     }
-    
+    <div className='board-columns'>
     {
       selectedBoard.columns.map((column)=> {
         return(
@@ -16,6 +16,10 @@ return(
         )
       })
     }
+    <div className='column column-new'>
+      Add New
+    </div>
+    </div>
   </div>
 )
 }
