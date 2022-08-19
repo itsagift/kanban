@@ -1,12 +1,11 @@
 import {useState, useEffect} from 'react';
 import { useLocalStorage } from "../useLocalStorage";
 import jsonData from '../data.json';
-import Board from './Board';
-import { useModal } from '../context/modal-context';
-import TestModal2 from './modals/TestModal2';
+import { useModal, unSetModal } from '../context/modal-context';
+import NewBoard from './modals/NewBoard';
 
 function BoardList({selectedBoard, setSelectedBoard}){
-  console.log("selected", selectedBoard)
+  
   const [dataTest, setDataTest] = useLocalStorage("data", jsonData.boards);
   const { setModal } = useModal();
   return (
@@ -18,14 +17,14 @@ function BoardList({selectedBoard, setSelectedBoard}){
         dataTest.map((element)=> {
           return(
             <li 
-              className={selectedBoard === element.name ? 'board-list-item board-list-item--active heading-M' : 'board-list-item board-list-item--inactive heading-M'}
-              onClick={()=> {setSelectedBoard(element.name)}}>
+              className={selectedBoard.name === element.name ? 'board-list-item board-list-item--active heading-M' : 'board-list-item board-list-item--inactive heading-M'}
+              onClick={()=> {setSelectedBoard(element)}}>
               {element.name}
             </li>
           )
         })
       }
-      <li><button className='board-list-item board-list-item--new heading-M' onClick={() => {setModal(<TestModal2/>)}}>
+      <li><button className='board-list-item board-list-item--new heading-M' onClick={() => {setModal(<NewBoard setModal={setModal}/>)}}>
         + Create New Board
       </button></li>
     </ul>

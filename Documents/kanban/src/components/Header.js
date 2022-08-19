@@ -13,10 +13,10 @@ return(
     <div className='header-left'>
       <div className='header-selected'>
         <h1 className='header-selected--desktop heading-XL'>
-          {selectedBoard}
+          {selectedBoard.name}
         </h1>
         <button className='header-selected--mobile' onClick={showSidebar}>
-          {selectedBoard}
+          {selectedBoard.name}
         </button>
       </div>
     </div>
